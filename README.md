@@ -1,13 +1,13 @@
 # Kubernetes-Update-Apps-The-Hard-Way
 Exercise in manually updating applications running on Kubernetes
 
-### Deployment Strategies
+## Deployment Strategies
 
 * Recreate - Deleting old pods and replacing them with new ones
 * blue-green - Switching from old to new at once
 * Rolling - Replacing one pod at a time with a new version while the old is running in parallel
 
-### Recreate
+### Manual Recreate
 
 ![Deployment strategy Recreate](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/deploymentStrategyRecreate.jpg "Kubernetes Recreate Deployment strategy")
 
@@ -16,6 +16,26 @@ Exercise in manually updating applications running on Kubernetes
 2. Update Pod template (image, etc...)
 3. Delete all running pods
 4. Replication Controller creates new pods from updated template
+
+### Lab
+
+1. Deploy app v1
+    ```
+    kubectl apply -f archetype-rc-and-service-v1.yaml
+    ```
+2. Start version check loop
+    ```
+    while true; do curl http://localhost:81;sleep 2; done
+    ```
+3. Edit RepliaSet & updated template.spec.image to v2
+    ```
+    kubectl edit ~
+    ```
+4. Delete v1 pods
+    ```
+    kubectl delete pod label -eq something
+    ```
+Insert Gif here
 
 ### blue-green
 
