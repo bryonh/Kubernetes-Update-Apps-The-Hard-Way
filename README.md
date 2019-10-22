@@ -36,7 +36,7 @@ Exercise in manually updating applications running on Kubernetes
     ```
     kubectl delete pods -l app=archetype
     ```
-Insert Gif here
+![Deployment strategy Recreate gif](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesDeploymentStrategyRecreate.gif "Kubernetes Recreate Deployment strategy")
 
 ### blue-green
 
