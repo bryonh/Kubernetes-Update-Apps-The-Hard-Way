@@ -1,0 +1,15 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: archetype
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: archetype
+      labels:
+        app: archetype
+    spec:
+      containers:
+      - image: duffney/archetype:v1
+        name: archetype
