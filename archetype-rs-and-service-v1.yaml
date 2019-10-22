@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: archetype
+  labels:
+    app: archetype
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: archetype
+  template:
+    metadata:
+      labels:
+        app: archetype
+    spec:
+      containers:
+      - name: flask
+        image: duffney/archetype:v1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: archetype
+spec:
+  type: LoadBalancer
+  selector:
+    app: archetype
+  ports:
+  - port: 81
+    targetPort: 80

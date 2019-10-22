@@ -21,19 +21,20 @@ Exercise in manually updating applications running on Kubernetes
 
 1. Deploy app v1
     ```
-    kubectl apply -f archetype-rc-and-service-v1.yaml
+    kubectl apply -f archetype-rs-and-service-v1.yaml
     ```
 2. Start version check loop
     ```
-    while true; do curl http://localhost:81;sleep 2; done
+    while true; do curl http://localhost:81;echo \n;sleep 2; done
     ```
 3. Edit RepliaSet & updated template.spec.image to v2
     ```
-    kubectl edit ~
+    kubectl edit replicasets archetype
+    kubectl get rs archetype  -o yaml
     ```
 4. Delete v1 pods
     ```
-    kubectl delete pod label -eq something
+    kubectl delete pods -l app=archetype
     ```
 Insert Gif here
 
