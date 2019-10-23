@@ -7,7 +7,7 @@ Exercise in manually updating applications running on Kubernetes
 * blue-green - Switching from old to new at once
 * Rolling - Replacing one pod at a time with a new version while the old is running in parallel
 
-### Manual Recreate
+### Manual Recreate Deployment
 
 ![Deployment strategy Recreate](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/deploymentStrategyRecreate.jpg "Kubernetes Recreate Deployment strategy")
 
@@ -17,7 +17,7 @@ Exercise in manually updating applications running on Kubernetes
 3. Delete all running pods
 4. Replication Controller creates new pods from updated template
 
-### Lab
+### Recreate Lab
 
 1. Deploy app v1
     ```
@@ -39,14 +39,43 @@ Exercise in manually updating applications running on Kubernetes
 
 ![Deployment strategy Recreate gif](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesDeploymentStrategyRecreate.gif "Kubernetes Recreate Deployment strategy")
 
-### blue-green
+### Manual blue-green Deployment
 
-1. Deploy new ReplicationController or ReplicaSet with update pod template
-2. Change service's label selector to reference new pods
-3. Delete old ReplicationController or ReplicaSet
+1. Deploy new ReplicationController or ReplicaSet with vNext of the pod template and version label
+2. Modify the Service's label selector to route to vNext pods
+3. Verify Endpoints selected by the Service & test application on vNext
+4. Delete old ReplicationController or ReplicaSet
 
 ![Deployment strategy blue green](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesBlueGreen.jpg "Kubernetes Recreate Deployment strategy")
 
+### blue-green Lab
+
+1. Deploy app v1
+    ```
+    kubectl apply -f archetype-rs-and-service-v1-blue-green.yaml
+    kubectl get po --show-labels -o wide
+    kubectl get endpoints archetype
+    ```
+2. Start version check loop
+    ```
+    while true; do curl http://localhost:81;echo \n;sleep 2; done
+    ```
+3. Deploy app v2
+    ```
+    kubectl apply -f archetype-rs-and-service-v2-blue-green.yaml
+    ```
+4. Modify the label selector of the Service
+     ```
+    kubectl patch service archetype -p '{"spec":{"selector":{"version":"v2"}}}'
+    ``` 
+5. Delete old ReplicaSet
+    ```
+    kubectl delete rs archetypev1
+    kubectl get pods
+    ```
+
+![kubernetesBlueGreenManualUpgrade](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesBlueGreenManualUpgrade.gif "kubernetes blue-green strategy"
+   
 ### Rolling update with kubectl
 
 1. Deploy new ReplicationController or Replicate set with updated template
