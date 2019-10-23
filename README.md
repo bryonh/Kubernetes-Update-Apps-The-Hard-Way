@@ -74,7 +74,7 @@ Exercise in manually updating applications running on Kubernetes
     kubectl get pods
     ```
 
-![kubernetesBlueGreenManualUpgrade](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesBlueGreenManualUpgrade.gif "kubernetes blue-green strategy"
+![kubernetesBlueGreenManualUpgrade](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesBlueGreenManualUpgrade.gif "kubernetes blue-green strategy")
    
 ### Rolling update with kubectl
 
