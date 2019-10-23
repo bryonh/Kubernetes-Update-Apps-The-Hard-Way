@@ -36,6 +36,7 @@ Exercise in manually updating applications running on Kubernetes
     ```
     kubectl delete pods -l app=archetype
     ```
+
 ![Deployment strategy Recreate gif](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesDeploymentStrategyRecreate.gif "Kubernetes Recreate Deployment strategy")
 
 ### blue-green
@@ -44,6 +45,7 @@ Exercise in manually updating applications running on Kubernetes
 2. Change service's label selector to reference new pods
 3. Delete old ReplicationController or ReplicaSet
 
+![Deployment strategy blue green](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesBlueGreen.jpg "Kubernetes Recreate Deployment strategy")
 
 ### Rolling update with kubectl
 
