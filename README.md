@@ -17,6 +17,8 @@ Exercise in manually updating applications running on Kubernetes
 3. Delete all running pods
 4. Replication Controller creates new pods from updated template
 
+_Suitable for applications that are tolerent of a downtime as the app switches over._
+
 ### Recreate Lab
 
 1. Deploy app v1
@@ -45,6 +47,8 @@ Exercise in manually updating applications running on Kubernetes
 2. Modify the Service's label selector to route to vNext pods
 3. Verify Endpoints selected by the Service & test application on vNext
 4. Delete old ReplicationController or ReplicaSet
+
+_Suitable for apps that cannot accept downtime and do not support old and new versions using the same data schema_
 
 ![Deployment strategy blue green](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubernetesBlueGreen.jpg "Kubernetes Recreate Deployment strategy")
 
@@ -83,6 +87,7 @@ Exercise in manually updating applications running on Kubernetes
 
 _application must support running old and new versions along side one another_
 
+![Deployment strategy rolling upgrade](https://github.com/Duffney/Kubernetes-Update-Apps-The-Hard-Way/blob/master/doc-images/kubenetesRollingupdrade.jpg  "Kubernetes rolling upgrade deployment stragetgy")
 
 ```
 #start curl loop to watch versions change
